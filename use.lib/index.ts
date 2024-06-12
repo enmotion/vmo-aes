@@ -4,15 +4,32 @@ export default class VmoAES {
   private code:number[]|null;
   private key:string;
   private KEYREG:RegExp = /^[a-z_A-Z0-9-\.!@#\$%\\\^&\*\)\(\+=\{\}\[\]\/",'<>~\·`\?:;|]{16,16}$/;
+
+  /**
+   * constructor 私有方法，创建KEY
+   * @param {string} keyString 
+   * @returns
+   */
   constructor(keyString:string){
     this.key = keyString
     this.code = this.createAesKEY(keyString);
     !this.code && console.warn(`VmoAES ERROR: Encryption key setting error, Expected value is a 16-character string, but the actual value is [${keyString}]`);
   }
+
+  /**
+   * createAesKEY 私有方法，创建KEY
+   * @param {string} key 
+   * @returns {null|number[]}
+   */
   private createAesKEY(key:string):null|number[]{
     return (key && key.constructor == String && key.match(this.KEYREG)) ? key.split('').map((k,index)=>k.charCodeAt(0)+index) : null;
   };
-  //加密 对象入参字符出参
+
+  /**
+   * enCryptoString 加密字符串
+   * @param {string} str 
+   * @returns 
+   */
   public enCryptoString(str: string) {
     if (this.code) {
       var textBytes = utils.utf8.toBytes(str);
@@ -24,6 +41,12 @@ export default class VmoAES {
       return str;
     }
   }
+
+  /**
+   * deCryptoString 解密字符串
+   * @param {string} str
+   * @returns 
+   */
   public deCryptoString(str: string) {
     if (this.code) {
       try {
@@ -39,12 +62,24 @@ export default class VmoAES {
       return str;
     }
   }
-  public enCryptoObjectToString(data:Record<string, any>) {
-    var str = JSON.stringify(data);
-    return this.deCryptoString(str);
+  /**
+   * deCryptoString 加密对象
+   * @param {Record<string, any>|any[]} data
+   * @returns {string|null}
+   */
+  public enCryptoObjectToString(data:Record<string, any>|any[]):string|null{
+    try{
+      return this.deCryptoString(JSON.stringify(data));
+    }catch(err){
+      return null
+    }
   }
-  //解密 字符入参对象出参
-  public deCryptoStringToObject(str: string) {
+  /**
+   * deCryptoString 解密对象
+   * @param str string
+   * @returns {Record<string, any>|any[]|null}
+   */
+  public deCryptoStringToObject(str: string):Record<string, any>|any[]|null{
     try {
       var objStr = this.deCryptoString(str);
       var r = JSON.parse(objStr);

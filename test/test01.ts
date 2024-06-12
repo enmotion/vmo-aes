@@ -20,7 +20,7 @@ describe('VmoAES enCryptoObjectToString & deCryptoStringToObject', () => {
   it('should eq enmotion', () => {
     const cropty = new VmoAES('asd!qwertyuighjk');
     const str = cropty.enCryptoObjectToString(['enmotion']);
-    expect(JSON.stringify(cropty.deCryptoStringToObject(str))).eq(JSON.stringify(['enmotion']))
+    expect(JSON.stringify(cropty.deCryptoStringToObject(str||''))).eq(JSON.stringify(['enmotion']))
   });
 });
 
