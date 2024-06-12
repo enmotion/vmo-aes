@@ -34,7 +34,8 @@ export default defineConfig({
       '@src': resolve(__dirname, 'src'), // 用于开发的 src 文件夹
       '@type': resolve(__dirname, 'types'),  // ts 描述文件夹
       '@comps': resolve(__dirname, 'components'), // 组件模块文件夹
-      "@lib": resolve(__dirname,'use.lib') // 文件模块文件夹
+      "@lib": resolve(__dirname,'use.lib'), // 文件模块文件夹
+      "@test":resolve(__dirname,"test") // 测试模块文件夹
     }
   }
 })
