@@ -1,8 +1,8 @@
 {
   "name": "vmo-aes",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
-  "private": true,
+  "private": false,
   "description": "encrypto",
   "main": "./dist/vmo-aes.umd.cjs",
   "module": "./dist/vmo-aes.js",
@@ -25,8 +25,7 @@
     "test": "npx mocha-vite-puppeteer"
   },
   "peerDependencies": {
-    "aes-js": "^3.1.2",
-    "vue": "^3.3.4"
+    "aes-js": "^3.1.2"
   },
   "devDependencies": {
     "@types/aes-js": "^3.1.4",
@@ -41,6 +40,7 @@
     "typescript": "^5.2.2",
     "vite": "^5.0.0",
     "vite-plugin-dts": "^3.6.4",
+    "vue": "^3.4.27",
     "vue-tsc": "^1.8.22"
   }
 }
