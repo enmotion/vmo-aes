@@ -21,10 +21,10 @@ export default defineConfig({
       fileName:"vmo-aes"
     },
     rollupOptions:{
-      external:["vue"],
+      external:["aes-js"],
       output:{
         globals:{
-          vue:"Vue",
+          'aes-js':"aes-js",
         }
       }
     }
